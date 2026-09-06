@@ -89,22 +89,47 @@ public class PannelloAzioni extends JPanel {
         return bottone;
     }
 
+    /**
+     * Restituisce il pulsante "Dichiara UNO".
+     *
+     * @return il pulsante per dichiarare UNO
+     */
     public JButton getBottoneDichiaraUno() {
         return bottoneDichiaraUno;
     }
 
+    /**
+     * Restituisce il pulsante "Contesta UNO".
+     *
+     * @return il pulsante per contestare UNO
+     */
     public JButton getBottoneContestaUno() {
         return bottoneContestaUno;
     }
 
+    /**
+     * Restituisce il pulsante "Nuova Partita".
+     *
+     * @return il pulsante per avviare una nuova partita
+     */
     public JButton getBottoneNuovaPartita() {
         return bottoneNuovaPartita;
     }
 
+    /**
+     * Restituisce il pulsante "Punteggi".
+     *
+     * @return il pulsante per visualizzare i punteggi
+     */
     public JButton getBottonePunteggi() {
         return bottonePunteggi;
     }
 
+    /**
+     * Restituisce il pulsante "Salta".
+     *
+     * @return il pulsante per saltare il turno
+     */
     public JButton getBottoneSalta() {
         return bottoneSalta;
     }

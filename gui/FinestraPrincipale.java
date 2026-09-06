@@ -89,7 +89,11 @@ public class FinestraPrincipale extends JFrame {
         });
     }
 
-    // Mostra il popup per configurare modalita', varianti e giocatori
+    /**
+     * Mostra il popup per configurare modalità, varianti e giocatori.
+     * Se l'utente annulla e non ci sono giocatori già presenti,
+     * viene applicata una configurazione predefinita di backup.
+     */
     private void apriConfigurazionePartita() {
         PopUpConfigurazione configurazionePartita = new PopUpConfigurazione();
         configurazionePartita.setVisible(true);
@@ -114,7 +118,11 @@ public class FinestraPrincipale extends JFrame {
         }
     }
 
-    // Inizializza i giocatori, i punteggi e avvia il primo round
+    /**
+     * Inizializza i giocatori, i punteggi e avvia il primo round.
+     *
+     * @param configurazioni la lista delle configurazioni dei giocatori scelte dal popup
+     */
     private void inizializzaPartita(List<PopUpConfigurazione.GiocatoreConfig> configurazioni) {
         giocatori.clear();
         mappaPunteggio.clear();
@@ -147,8 +155,10 @@ public class FinestraPrincipale extends JFrame {
         nuovoRound();
     }
 
-    // Prepara un nuovo round (distribuisce 7 carte e posiziona la prima carta sugli
-    // scarti)
+    /**
+     * Prepara un nuovo round: pulisce le mani, distribuisce 7 carte a ciascun
+     * giocatore e posiziona la prima carta numerica sulla pila degli scarti.
+     */
     private void nuovoRound() {
         for (Giocatore g : giocatori) {
             g.getMano().clear();
@@ -184,14 +194,21 @@ public class FinestraPrincipale extends JFrame {
         aggiornaStatoGrafico();
     }
 
-    // Registra i listener per i pulsanti, il mazzo e le carte in mano
+    /**
+     * Registra i listener per i pulsanti di azione, il click sul mazzo
+     * e il click sulle carte in mano al giocatore.
+     */
     private void collegaEventiGUI() {
         pannelloAzioni.registraActionListener(new AzioniPannelloListener());
         pannelloTavolo.registraMazzoListener(new AzioniPannelloListener());
         pannelloManoGiocatore.registraActionListener(new CartaManoListener());
     }
 
-    // Gestisce l'azione di pesca dal mazzo o lo stacking
+    /**
+     * Gestisce l'azione di pesca dal mazzo. Se lo stacking è attivo e c'è un
+     * accumulo, il giocatore pesca tutte le carte accumulate e salta il turno;
+     * altrimenti pesca una singola carta e, se giocabile, può giocarla subito.
+     */
     private void eseguiAzionePesca() {
         Giocatore corrente = giocatori.get(indiceGiocatoreCorrente);
         if (!(corrente instanceof GiocatoreUmano)) {
@@ -240,7 +257,10 @@ public class FinestraPrincipale extends JFrame {
         aggiornaStatoGrafico();
     }
 
-    // Gestisce la dichiarazione di UNO da parte del giocatore umano
+    /**
+     * Gestisce la dichiarazione di UNO da parte del giocatore umano.
+     * È valida solo se il giocatore ha esattamente 2 carte e almeno una giocabile.
+     */
     private void eseguiAzioneDichiaraUno() {
         Giocatore corrente = giocatori.get(indiceGiocatoreCorrente);
         if (corrente instanceof GiocatoreUmano) {
@@ -258,7 +278,11 @@ public class FinestraPrincipale extends JFrame {
         }
     }
 
-    // Gestisce la contestazione di UNO contro avversari che possiedono 1 carta
+    /**
+     * Gestisce la contestazione di UNO: controlla se qualche avversario ha
+     * una sola carta senza aver dichiarato UNO e, in tal caso, lo penalizza
+     * con 2 carte pescate.
+     */
     private void eseguiAzioneContestaUno() {
         boolean contestazioneEffettuata = false;
         for (Giocatore g : giocatori) {
@@ -278,7 +302,11 @@ public class FinestraPrincipale extends JFrame {
         aggiornaStatoGrafico();
     }
 
-    // Gestisce il passaggio del turno dopo aver pescato
+    /**
+     * Gestisce il passaggio del turno dopo aver pescato.
+     * L'azione è consentita solo se il giocatore umano ha già pescato
+     * e lo stacking non è attivo.
+     */
     private void eseguiAzioneSalta() {
         Giocatore corrente = giocatori.get(indiceGiocatoreCorrente);
         if (!(corrente instanceof GiocatoreUmano)) {
@@ -302,6 +330,11 @@ public class FinestraPrincipale extends JFrame {
         aggiornaStatoGrafico();
     }
 
+    /**
+     * Listener che gestisce gli eventi dei pulsanti del pannello azioni
+     * (pesca, salta, dichiara UNO, contesta UNO, nuova partita, punteggi)
+     * e del click sul mazzo.
+     */
     private class AzioniPannelloListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -321,6 +354,10 @@ public class FinestraPrincipale extends JFrame {
         }
     }
 
+    /**
+     * Listener che intercetta il click su una carta nella mano del giocatore
+     * e avvia la mossa corrispondente, verificando che sia il turno dell'umano.
+     */
     private class CartaManoListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -339,7 +376,14 @@ public class FinestraPrincipale extends JFrame {
         }
     }
 
-    // Esegue la mossa selezionata dal giocatore umano e applica regole/varianti
+    /**
+     * Esegue la mossa selezionata dal giocatore umano: valida la carta,
+     * la scarta, applica le varianti attive (stacking, NumberRush, SevenZero)
+     * e gestisce le regole di contestazione UNO e fine round.
+     *
+     * @param corrente   il giocatore di turno
+     * @param cartaScelta la carta selezionata dalla mano
+     */
     private void eseguiMossaGiocatore(Giocatore corrente, Carta cartaScelta) {
         Carta cartaInCima = getCartaInCima();
         Colore coloreAttuale = getColoreAttuale();
@@ -419,7 +463,11 @@ public class FinestraPrincipale extends JFrame {
         }
     }
 
-    // Esegue il turno automatico per un bot
+    /**
+     * Esegue il turno automatico per un bot: gestisce lo stacking,
+     * sceglie la mossa tramite l'IA del bot, applica gli effetti delle
+     * carte speciali e gestisce la dichiarazione/contestazione di UNO.
+     */
     private void eseguiMossaBot() {
         if (partitaFinita)
             return;
@@ -550,7 +598,13 @@ public class FinestraPrincipale extends JFrame {
         aggiornaStatoGrafico();
     }
 
-    // Applica gli effetti delle carte speciali e delle varianti attive
+    /**
+     * Applica gli effetti delle carte speciali (SKIP, REVERSE, +2, +4,
+     * WILD) e delle varianti attive (Stacking, SevenZero) sulla partita.
+     *
+     * @param carta    la carta appena giocata
+     * @param corrente il giocatore che ha giocato la carta
+     */
     private void applicaEffettiRegole(Carta carta, Giocatore corrente) {
         if (corrente.getNumeroCarte() == 0) {
             return;
@@ -676,6 +730,14 @@ public class FinestraPrincipale extends JFrame {
         }
     }
 
+    /**
+     * Verifica se il giocatore ha in mano altre carte con lo stesso valore
+     * numerico (0–9) della carta scelta, per attivare la variante NumberRush.
+     *
+     * @param corrente    il giocatore di turno
+     * @param cartaScelta la carta di riferimento
+     * @return {@code true} se esistono duplicati numerici giocabili
+     */
     private boolean checkCarteNumericheUguali(Giocatore corrente, Carta cartaScelta) {
         if (cartaScelta.getValoreCarta() == getCartaInCima().getValoreCarta()) {
 
@@ -690,7 +752,13 @@ public class FinestraPrincipale extends JFrame {
         }
     }
 
-    // Gestisce la fine del round, assegna i punti e apre la schermata punteggi
+    /**
+     * Gestisce la fine del round: assegna i punti al vincitore sommando
+     * le carte rimaste agli avversari, mostra la schermata dei punteggi e,
+     * se la soglia è raggiunta, dichiara la vittoria definitiva.
+     *
+     * @param vincitoreRound il giocatore che ha finito le carte per primo
+     */
     private void gestisciFineRound(Giocatore vincitoreRound) {
         if (timerTurnoBot != null)
             timerTurnoBot.stop();
@@ -731,13 +799,22 @@ public class FinestraPrincipale extends JFrame {
 
     }
 
-    // Passa il turno al giocatore successivo in base alla direzione
+    /**
+     * Passa il turno al giocatore successivo in base alla direzione
+     * corrente (oraria o antioraria) e resetta il flag di pesca.
+     */
     private void passaAlProssimoGiocatore() {
         haPescatoNelTurno = false;
         indiceGiocatoreCorrente = (indiceGiocatoreCorrente + direzione + giocatori.size()) % giocatori.size();
     }
 
-    // Pesca una carta dal mazzo (rimescola gli scarti se esaurito)
+    /**
+     * Pesca una carta dal mazzo. Se il mazzo è esaurito, rimescola la pila
+     * degli scarti (esclusa la carta in cima) per ricrearlo. Se anche gli
+     * scarti sono vuoti, restituisce una carta ZERO ROSSO di fallback.
+     *
+     * @return la carta pescata dal mazzo
+     */
     private Carta pescaCartaMazzo() {
         if (mazzoPesca.isEmpty()) {
             if (scarti.size() > 1) {
@@ -756,18 +833,33 @@ public class FinestraPrincipale extends JFrame {
         return mazzoPesca.isEmpty() ? new Carta(Colore.ROSSO, Valore.ZERO) : mazzoPesca.remove(0);
     }
 
-    // Restituisce la carta in cima alla pila degli scarti
+    /**
+     * Restituisce la carta in cima alla pila degli scarti.
+     * Se la pila è vuota, restituisce una carta ZERO ROSSO di fallback.
+     *
+     * @return la carta in cima agli scarti
+     */
     private Carta getCartaInCima() {
         return scarti.isEmpty() ? new Carta(Colore.ROSSO, Valore.ZERO) : scarti.get(scarti.size() - 1);
     }
 
-    // Restituisce il colore attivo di gioco
+    /**
+     * Restituisce il colore attualmente attivo sul tavolo di gioco.
+     * Se la carta in cima è un jolly con colore NESSUNO, ritorna ROSSO come default.
+     *
+     * @return il colore attivo
+     */
     private Colore getColoreAttuale() {
         Carta inCima = getCartaInCima();
         return inCima.getColoreCarta() == Colore.NESSUNO ? Colore.ROSSO : inCima.getColoreCarta();
     }
 
-    // Imposta il colore della carta in cima agli scarti
+    /**
+     * Imposta il colore della carta in cima agli scarti (usato dopo la scelta
+     * del colore su un jolly o un +4).
+     *
+     * @param colore il nuovo colore da assegnare
+     */
     private void setScartiColore(Colore colore) {
         Carta inCima = getCartaInCima();
         if (inCima != null) {
@@ -775,7 +867,11 @@ public class FinestraPrincipale extends JFrame {
         }
     }
 
-    // Avvia un timer di 2 secondi per simulare il ragionamento del bot
+    /**
+     * Avvia un timer di 2 secondi per simulare il ragionamento del bot.
+     * Il timer si attiva solo se il giocatore corrente non è umano,
+     * la partita non è finita e non c'è già un timer in esecuzione.
+     */
     private void controllaEAvviaTurnoBot() {
         if (partitaFinita)
             return;
@@ -795,7 +891,11 @@ public class FinestraPrincipale extends JFrame {
         }
     }
 
-    // Aggiorna tutti i pannelli dell'interfaccia grafica
+    /**
+     * Aggiorna tutti i pannelli dell'interfaccia grafica: pannello avversari,
+     * tavolo centrale, mano del giocatore umano. Forza il repaint immediato
+     * e avvia il timer del bot se necessario.
+     */
     private void aggiornaStatoGrafico() {
         Giocatore corrente = giocatori.get(indiceGiocatoreCorrente);
 
@@ -820,6 +920,12 @@ public class FinestraPrincipale extends JFrame {
         controllaEAvviaTurnoBot();
     }
 
+    /**
+     * Punto di ingresso dell'applicazione UNO.
+     * Crea e mostra la finestra principale nell'Event Dispatch Thread di Swing.
+     *
+     * @param args argomenti da linea di comando (non utilizzati)
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             FinestraPrincipale finestra = new FinestraPrincipale();

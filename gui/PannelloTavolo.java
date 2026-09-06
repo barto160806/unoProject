@@ -203,6 +203,11 @@ public class PannelloTavolo extends JPanel {
         }
     }
 
+    /**
+     * Restituisce il componente grafico del mazzo di pesca.
+     *
+     * @return il widget del mazzo
+     */
     public PannelloCarta getWidgetMazzo() {
         return widgetMazzo;
     }

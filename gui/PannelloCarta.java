@@ -23,6 +23,10 @@ public class PannelloCarta extends JButton {
         inizializza();
     }
 
+    /**
+     * Configura l'aspetto del pulsante: cursore a mano, font, trasparenza
+     * e caricamento dell'icona della carta.
+     */
     private void inizializza() {
         setCursor(new Cursor(Cursor.HAND_CURSOR));
         setFont(StileUI.caricaFont());
@@ -33,12 +37,20 @@ public class PannelloCarta extends JButton {
         setBorderPainted(false);
     }
 
+    /**
+     * Imposta l'icona del pulsante calcolandola a partire dalla carta associata.
+     */
     private void setIcona() {
         ImageIcon icona = calcolaIcona();
         setIcon(icona);
     }
 
-    // Carica l'immagine JPG della carta e la ridimensiona a 90x120 pixel
+    /**
+     * Carica l'immagine JPG corrispondente alla carta e la ridimensiona
+     * a 90×120 pixel. Se la carta è {@code null}, mostra il dorso coperto.
+     *
+     * @return l'icona ridimensionata della carta
+     */
     private ImageIcon calcolaIcona() {
         if (carta == null) {
             ImageIcon iconaNulla = new ImageIcon("gui/images/cartaCoperta.jpg");

@@ -176,6 +176,10 @@ public class PopUpConfigurazione extends JDialog {
         this.setContentPane(pannelloPrincipale);
     }
 
+    /**
+     * Aggiorna la lista visuale dei giocatori nel pannello di configurazione
+     * in base al numero selezionato dallo slider.
+     */
     private void aggiornaListaGiocatoriGUI() {
         pannelloListaGiocatori.removeAll();
         int count = (int) selezioneNumeroGiocatori.getValue();
@@ -209,6 +213,13 @@ public class PopUpConfigurazione extends JDialog {
         pannelloListaGiocatori.repaint();
     }
 
+    /**
+     * Valida e converte la soglia di vittoria inserita dall'utente.
+     * Se il valore è vuoto o contiene caratteri non numerici, ritorna 500.
+     *
+     * @param soglia il testo inserito dall'utente
+     * @return il valore numerico della soglia, o 500 come fallback
+     */
     private int checkSoglia(String soglia) {
         if (soglia.equals(""))
             return 500;
@@ -230,6 +241,10 @@ public class PopUpConfigurazione extends JDialog {
         }
     }
 
+    /**
+     * Raccoglie tutte le impostazioni dalla GUI (modalità, varianti,
+     * lista giocatori), salva la configurazione e chiude il dialogo.
+     */
     private void salvaEConferma() {
 
         String testoSoglia = soglia.getText().trim();
@@ -265,7 +280,10 @@ public class PopUpConfigurazione extends JDialog {
         this.dispose();
     }
 
-    // Implementazione Listener
+    /**
+     * Listener interno che gestisce gli eventi dei pulsanti della finestra
+     * di configurazione (cambio modalità, avvio partita, annullamento).
+     */
     private class ConfigurazioneListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -278,31 +296,65 @@ public class PopUpConfigurazione extends JDialog {
         }
     }
 
-    // Metodi Getter
+    /**
+     * Indica se l'utente ha confermato la configurazione premendo "AVVIA PARTITA".
+     *
+     * @return {@code true} se la configurazione è stata confermata
+     */
     public boolean isConfermata() {
         return confermata;
     }
 
+    /**
+     * Indica se è stata selezionata la modalità a punti.
+     *
+     * @return {@code true} se si gioca a punti, {@code false} per partita singola
+     */
     public boolean isModalitaPunti() {
         return modalitaPunti;
     }
 
+    /**
+     * Restituisce la soglia di punti necessaria per vincere la partita.
+     *
+     * @return la soglia di vittoria (default 500)
+     */
     public int getSogliaVittoria() {
         return sogliaVittoria;
     }
 
+    /**
+     * Indica se la variante Stacking è attiva.
+     *
+     * @return {@code true} se lo stacking è abilitato
+     */
     public boolean isVarianteStacking() {
         return varianteStacking;
     }
 
+    /**
+     * Indica se la variante NumberRush è attiva.
+     *
+     * @return {@code true} se NumberRush è abilitato
+     */
     public boolean isVarianteNumberRush() {
         return varianteNumberRush;
     }
 
+    /**
+     * Indica se la variante SevenZero è attiva.
+     *
+     * @return {@code true} se SevenZero è abilitato
+     */
     public boolean isVarianteSevenZero() {
         return varianteSevenZero;
     }
 
+    /**
+     * Restituisce la lista delle configurazioni dei giocatori impostate dall'utente.
+     *
+     * @return la lista di {@link GiocatoreConfig} con nomi e tipi dei partecipanti
+     */
     public List<GiocatoreConfig> getGiocatoriConfig() {
         return giocatoriConfig;
     }
