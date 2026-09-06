@@ -35,4 +35,4 @@ Affinché il progetto carichi correttamente gli elementi grafici e i font a runt
 ### 4. Consultazione della Documentazione
 
 * **Documentazione del Codice (JavaDoc)**: Per consultare la specifica dettagliata delle classi, aprire il file `index.html` presente nella directory `JavaDOC/`.
-* **Manuale di avvio e dettagli del progetto**: La guida all'avvio dell'applicazione e i dettagli di progetto sono consultabili nel file `RelazioneUNO.pdf`.
+* **Manuale di avvio e dettagli del progetto**: La guida all'avvio dell'applicazione e i dettagli di progetto sono consultabili nel file `relazioneUNO.pdf`.

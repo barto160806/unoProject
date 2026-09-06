@@ -34,7 +34,7 @@ public class PopUpConfigurazione extends JDialog {
     private JCheckBox sevenZero;
     private JCheckBox partitaSingola;
     private JCheckBox partitaPunti;
-    private JTextField Soglia;
+    private JTextField soglia;
 
     /**
      * Dati di configurazione per un singolo giocatore (nome e tipo).
@@ -98,14 +98,14 @@ public class PopUpConfigurazione extends JDialog {
         bg.add(partitaPunti);
 
         JLabel testoSoglia = new JLabel("Soglia vittoria:");
-        Soglia = new JTextField("500", 5);
-        Soglia.setEnabled(false);
+        soglia = new JTextField("500", 5);
+        soglia.setEnabled(false);
 
         pannelloModalità.add(partitaSingola);
         pannelloModalità.add(partitaPunti);
         pannelloModalità.add(Box.createHorizontalStrut(15));
         pannelloModalità.add(testoSoglia);
-        pannelloModalità.add(Soglia);
+        pannelloModalità.add(soglia);
 
         pannelloCentrale.add(pannelloModalità);
         pannelloCentrale.add(Box.createVerticalStrut(10));
@@ -232,7 +232,7 @@ public class PopUpConfigurazione extends JDialog {
 
     private void salvaEConferma() {
 
-        String testoSoglia = Soglia.getText().trim();
+        String testoSoglia = soglia.getText().trim();
         sogliaVittoria = checkSoglia(testoSoglia);
 
         modalitaPunti = partitaPunti.isSelected();
@@ -271,7 +271,7 @@ public class PopUpConfigurazione extends JDialog {
         public void actionPerformed(ActionEvent e) {
             String comando = e.getActionCommand();
             switch (comando) {
-                case "MODALITA" -> Soglia.setEnabled(partitaPunti.isSelected());
+                case "MODALITA" -> soglia.setEnabled(partitaPunti.isSelected());
                 case "AVVIA" -> salvaEConferma();
                 case "ANNULLA" -> PopUpConfigurazione.this.dispose();
             }
