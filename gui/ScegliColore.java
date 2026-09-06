@@ -7,7 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Finestra di dialogo per la scelta del colore dopo aver giocato un jolly o un +4.
+ * Finestra di dialogo per la scelta del colore dopo aver giocato un jolly o un
+ * +4.
  */
 public class ScegliColore extends JDialog {
 
@@ -47,6 +48,9 @@ public class ScegliColore extends JDialog {
         bottone.setBackground(colore);
         bottone.setForeground(Color.WHITE);
         bottone.setFont(StileUI.caricaFont());
+        bottone.setOpaque(true);
+        bottone.setContentAreaFilled(true);
+        bottone.setBorderPainted(false);
         bottone.setActionCommand(comando);
         bottone.addActionListener(listener);
         bottone.setFocusPainted(false);

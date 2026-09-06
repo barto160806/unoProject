@@ -4,3 +4,4 @@ bin/
 .settings/
 .metadata/
 *.log
+.DS_Store

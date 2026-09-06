@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Finestra di dialogo che mostra la classifica dei punteggi a fine round o a fine partita.
+ * Finestra di dialogo che mostra la classifica dei punteggi a fine round o a
+ * fine partita.
  */
 public class SchermataPunteggi extends JDialog {
 
@@ -76,6 +77,9 @@ public class SchermataPunteggi extends JDialog {
         JButton bottoneContinua = new JButton(finePartita ? "Chiudi" : "Inizia Prossimo Round");
         bottoneContinua.setFont(StileUI.caricaFont());
         bottoneContinua.setBackground(new Color(56, 142, 60));
+        bottoneContinua.setOpaque(true);
+        bottoneContinua.setContentAreaFilled(true);
+        bottoneContinua.setBorderPainted(false);
         bottoneContinua.setForeground(Color.WHITE);
         bottoneContinua.setFocusPainted(false);
 

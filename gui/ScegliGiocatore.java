@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Finestra di dialogo per scegliere con quale avversario scambiare la mano (regola del 7).
+ * Finestra di dialogo per scegliere con quale avversario scambiare la mano
+ * (regola del 7).
  */
 public class ScegliGiocatore extends JDialog {
 
@@ -20,7 +21,7 @@ public class ScegliGiocatore extends JDialog {
     /**
      * Crea la finestra con un pulsante per ciascun avversario.
      * 
-     * @param pannelloPrincipale la finestra principale
+     * @param pannelloPrincipale   la finestra principale
      * @param corrente             il giocatore che ha giocato il 7
      * @param giocatoriDisponibili tutti i giocatori della partita
      */
@@ -46,6 +47,9 @@ public class ScegliGiocatore extends JDialog {
                 bottone.setFont(StileUI.caricaFont());
                 bottone.setBackground(new Color(38, 166, 154));
                 bottone.setForeground(Color.WHITE);
+                bottone.setOpaque(true);
+                bottone.setContentAreaFilled(true);
+                bottone.setBorderPainted(false);
                 bottone.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         JButton source = (JButton) e.getSource();
@@ -74,7 +78,7 @@ public class ScegliGiocatore extends JDialog {
     /**
      * Mostra la finestra di dialogo e restituisce il giocatore selezionato.
      * 
-     * @param pannelloPrincipale la finestra principale
+     * @param pannelloPrincipale   la finestra principale
      * @param corrente             il giocatore attivo
      * @param giocatoriDisponibili tutti i giocatori
      * @return il giocatore con cui scambiare le carte

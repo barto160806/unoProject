@@ -163,6 +163,9 @@ public class PopUpConfigurazione extends JDialog {
         bottoneAvvia.setFont(StileUI.caricaFont());
         bottoneAvvia.setBackground(new Color(56, 142, 60));
         bottoneAvvia.setForeground(Color.WHITE);
+        bottoneAvvia.setOpaque(true);
+        bottoneAvvia.setContentAreaFilled(true);
+        bottoneAvvia.setBorderPainted(false);
         bottoneAvvia.setActionCommand("AVVIA");
         bottoneAvvia.addActionListener(listener);
 

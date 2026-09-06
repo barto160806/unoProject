@@ -25,7 +25,7 @@ public class PannelloAzioni extends JPanel {
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.insets = new Insets(10, 15, 10, 15);
+        gbc.insets = new Insets(7, 15, 7, 15);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         bottoneDichiaraUno = creaPulsante("DICHIARA UNO!", new Color(13, 133, 26));
@@ -77,8 +77,11 @@ public class PannelloAzioni extends JPanel {
      */
     private JButton creaPulsante(String testo, Color coloreSfondo) {
         JButton bottone = new JButton(testo);
-        bottone.setPreferredSize(new Dimension(200, 60));
+        bottone.setPreferredSize(new Dimension(220, 42));
         bottone.setBackground(coloreSfondo);
+        bottone.setOpaque(true);
+        bottone.setContentAreaFilled(true);
+        bottone.setBorderPainted(false);
         bottone.setForeground(Color.WHITE);
         bottone.setFont(StileUI.caricaFont());
         bottone.setFocusPainted(false);
