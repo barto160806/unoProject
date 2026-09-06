@@ -121,7 +121,8 @@ public class FinestraPrincipale extends JFrame {
     /**
      * Inizializza i giocatori, i punteggi e avvia il primo round.
      *
-     * @param configurazioni la lista delle configurazioni dei giocatori scelte dal popup
+     * @param configurazioni la lista delle configurazioni dei giocatori scelte dal
+     *                       popup
      */
     private void inizializzaPartita(List<PopUpConfigurazione.GiocatoreConfig> configurazioni) {
         giocatori.clear();
@@ -381,7 +382,7 @@ public class FinestraPrincipale extends JFrame {
      * la scarta, applica le varianti attive (stacking, NumberRush, SevenZero)
      * e gestisce le regole di contestazione UNO e fine round.
      *
-     * @param corrente   il giocatore di turno
+     * @param corrente    il giocatore di turno
      * @param cartaScelta la carta selezionata dalla mano
      */
     private void eseguiMossaGiocatore(Giocatore corrente, Carta cartaScelta) {
@@ -599,8 +600,8 @@ public class FinestraPrincipale extends JFrame {
     }
 
     /**
-     * Applica gli effetti delle carte speciali (SKIP, REVERSE, +2, +4,
-     * WILD) e delle varianti attive (Stacking, SevenZero) sulla partita.
+     * Applica gli effetti delle carte speciali e delle varianti
+     * Stacking e Seven-Zero.
      *
      * @param carta    la carta appena giocata
      * @param corrente il giocatore che ha giocato la carta
@@ -845,7 +846,8 @@ public class FinestraPrincipale extends JFrame {
 
     /**
      * Restituisce il colore attualmente attivo sul tavolo di gioco.
-     * Se la carta in cima è un jolly con colore NESSUNO, ritorna ROSSO come default.
+     * Se la carta in cima è un jolly con colore NESSUNO, ritorna ROSSO come
+     * default.
      *
      * @return il colore attivo
      */

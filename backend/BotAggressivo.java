@@ -8,8 +8,9 @@ import java.util.List;
  * Bot che adotta una strategia aggressiva, privilegiando le carte speciali
  * e i jolly per mettere in difficolta' gli avversari. Sceglie sempre il
  * colore piu' presente nella propria mano e, nello scambio Seven-Zero,
- * punta all'avversario con meno carte. Le decisioni casuali (UNO,
- * contestazioni, challenge) hanno il 70% di probabilita' di successo.
+ * punta all'avversario con meno carte. Le decisioni casuali (UNO, contestazioni
+ * e challenge)
+ * restituiscono un esito positivo nel 70% dei casi.
  */
 public class BotAggressivo extends Giocatore {
 
@@ -52,7 +53,8 @@ public class BotAggressivo extends Giocatore {
     }
 
     /**
-     * Sceglie l'avversario con meno carte in mano per lo scambio della regola del 7.
+     * Sceglie l'avversario con meno carte in mano per lo scambio della regola del
+     * 7.
      * 
      * @param corrente  il bot che ha giocato il 7
      * @param giocatori tutti i giocatori della partita
@@ -71,7 +73,8 @@ public class BotAggressivo extends Giocatore {
     }
 
     /**
-     * Sceglie il colore piu' presente nella propria mano dopo aver giocato un jolly.
+     * Sceglie il colore piu' presente nella propria mano dopo aver giocato un
+     * jolly.
      * 
      * @return il colore con piu' carte in mano
      */
