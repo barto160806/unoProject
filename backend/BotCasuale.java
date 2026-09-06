@@ -5,32 +5,29 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Rappresenta un Bot con strategia "Casuale".
- * Questa bot:
- * - Gioca la prima carta valida trovata nella propria mano.
- * - Sceglie un colore a caso tra quelli che possiede in mano.
- * - Nello scambio Seven-Zero sceglie un avversario a caso.
- * - Prende decisioni con la probabilità casuale del 50% (testa o croce).
+ * Bot che gioca in modo completamente casuale: scarta la prima carta
+ * valida che trova, sceglie colori e avversari a caso, e prende ogni
+ * decisione (UNO, contestazioni, challenge) lanciando una moneta.
  */
 public class BotCasuale extends Giocatore {
 
-    /** Contatore per l'assegnazione automatica del nome al bot. */
+    /** Contatore progressivo per assegnare nomi univoci ai bot casuali. */
     public static int contatoreGiocatore;
 
     /**
-     * Costruttore di default che assegna un nome univoco.
+     * Crea un nuovo bot casuale con nome univoco progressivo.
      */
     public BotCasuale() {
         super("Bot casuale " + ++contatoreGiocatore);
     }
 
     /**
-     * Seleziona la prima carta giocabile trovata nella propria mano.
+     * Gioca la prima carta valida che trova nella mano.
      * 
      * @param cartaInCima       la carta in cima agli scarti
      * @param coloreCorrente    il colore attualmente attivo
-     * @param prossimoGiocatore nome del giocatore successivo
-     * @return la prima carta valida oppure null per pescare
+     * @param prossimoGiocatore il nome del prossimo giocatore
+     * @return la carta scelta, oppure null se deve pescare
      */
     @Override
     public Carta scegliMossa(Carta cartaInCima, Colore coloreCorrente, String prossimoGiocatore) {
@@ -44,12 +41,11 @@ public class BotCasuale extends Giocatore {
     }
 
     /**
-     * Sceglie un avversario a caso tra quelli disponibili per lo scambio carte
-     * (regola del 7).
+     * Sceglie a caso un avversario con cui scambiare le carte per la regola del 7.
      * 
-     * @param giocatore            il bot stesso
-     * @param giocatoriDisponibili la lista di tutti i giocatori
-     * @return un Giocatore scelto casualmente
+     * @param giocatore            il bot che ha giocato il 7
+     * @param giocatoriDisponibili tutti i giocatori della partita
+     * @return un avversario estratto casualmente
      */
     @Override
     public Giocatore scegliGiocatoreDaScambiare(Giocatore giocatore, List<Giocatore> giocatoriDisponibili) {
@@ -60,9 +56,10 @@ public class BotCasuale extends Giocatore {
     }
 
     /**
-     * Sceglie casualmente un colore tra quelli che possiede in mano.
+     * Sceglie un colore a caso tra quelli presenti nella propria mano
+     * dopo aver giocato un jolly. Se non ha carte colorate, ne sceglie uno qualsiasi.
      * 
-     * @return il colore estratto.
+     * @return il colore scelto
      */
     @Override
     public Colore scegliColore() {
@@ -103,17 +100,21 @@ public class BotCasuale extends Giocatore {
         return coloreScelto;
     }
 
-    // Genera un valore booleano casuale
+    /**
+     * Lancia una moneta: restituisce true o false con il 50% di probabilita'.
+     * 
+     * @return esito casuale
+     */
     public boolean randomBooleanCode() {
         Random random = new Random();
         return random.nextBoolean();
     }
 
     /**
-     * Decide casualmente se effettuare la challenge sul +4.
+     * Decide a caso se sfidare il +4 giocato da un avversario.
      * 
-     * @param carteAvversario numero carte avversario
-     * @return esito della decisione casuale
+     * @param carteAvversario le carte rimaste all'avversario
+     * @return true se lancia la sfida, false altrimenti
      */
     @Override
     public boolean effettuaChallenge(int carteAvversario) {
@@ -121,9 +122,9 @@ public class BotCasuale extends Giocatore {
     }
 
     /**
-     * Dichiara UNO con il 50% di probabilità.
+     * Dichiara UNO con il 50% di probabilita' di ricordarsi.
      * 
-     * @return esito della decisione casuale
+     * @return true se dichiara UNO, false se se ne dimentica
      */
     @Override
     public boolean haDichiaratoUno() {
@@ -131,10 +132,10 @@ public class BotCasuale extends Giocatore {
     }
 
     /**
-     * Contesta la mancata dichiarazione di UNO con il 50% di probabilità.
+     * Contesta a caso un avversario che non ha detto UNO.
      * 
-     * @param bersaglio avversario con 1 carta.
-     * @return esito della decisione casuale
+     * @param bersaglio l'avversario da contestare
+     * @return true se contesta, false altrimenti
      */
     @Override
     public boolean contestazioneUno(Giocatore bersaglio) {

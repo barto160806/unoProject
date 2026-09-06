@@ -29,9 +29,9 @@ public class PopUpConfigurazione extends JDialog {
 
     private JSlider selezioneNumeroGiocatori;
     private JPanel pannelloListaGiocatori;
-    private JCheckBox Stacking;
-    private JCheckBox NumberRush;
-    private JCheckBox SevenZero;
+    private JCheckBox stacking;
+    private JCheckBox numberRush;
+    private JCheckBox sevenZero;
     private JCheckBox partitaSingola;
     private JCheckBox partitaPunti;
     private JTextField Soglia;
@@ -115,13 +115,13 @@ public class PopUpConfigurazione extends JDialog {
         pannelloVarianti.setBorder(BorderFactory.createTitledBorder("Varianti di Gioco Attive"));
         pannelloVarianti.setOpaque(false);
 
-        Stacking = new JCheckBox("Stacking");
-        NumberRush = new JCheckBox("NumberRush");
-        SevenZero = new JCheckBox("SevenZero");
+        stacking = new JCheckBox("Stacking");
+        numberRush = new JCheckBox("NumberRush");
+        sevenZero = new JCheckBox("SevenZero");
 
-        pannelloVarianti.add(Stacking);
-        pannelloVarianti.add(NumberRush);
-        pannelloVarianti.add(SevenZero);
+        pannelloVarianti.add(stacking);
+        pannelloVarianti.add(numberRush);
+        pannelloVarianti.add(sevenZero);
 
         pannelloCentrale.add(pannelloVarianti);
         pannelloCentrale.add(Box.createVerticalStrut(10));
@@ -233,9 +233,9 @@ public class PopUpConfigurazione extends JDialog {
         sogliaVittoria = checkSoglia(testoSoglia);
 
         modalitaPunti = partitaPunti.isSelected();
-        varianteStacking = Stacking.isSelected();
-        varianteNumberRush = NumberRush.isSelected();
-        varianteSevenZero = SevenZero.isSelected();
+        varianteStacking = stacking.isSelected();
+        varianteNumberRush = numberRush.isSelected();
+        varianteSevenZero = sevenZero.isSelected();
 
         giocatoriConfig.clear();
         Component[] componentiPannelloGiocatori = pannelloListaGiocatori.getComponents();

@@ -7,16 +7,13 @@ import java.util.ArrayList;
  * Classe astratta che rappresenta un giocatore di UNO (umano o bot).
  * Gestisce la mano di carte, il punteggio e definisce le azioni di gioco.
  */
-public abstract class Giocatore implements Comparable<Giocatore> {
+public abstract class Giocatore {
 
     /** Le carte in mano al giocatore. */
     protected List<Carta> mano = new ArrayList<>();
 
     /** Nome del giocatore. */
     public String nome;
-
-    /** Punteggio accumulato nella partita a punti. */
-    protected int punteggio;
 
     /** Indica se il giocatore ha dichiarato UNO in tempo. */
     public boolean haDichiaratoUnoSuccesso = false;
@@ -162,17 +159,6 @@ public abstract class Giocatore implements Comparable<Giocatore> {
             totalePunti += carta.valoreCarta.getPunti();
         }
         return totalePunti;
-    }
-
-    /**
-     * Confronta due giocatori in ordine alfabetico per nome.
-     * 
-     * @param giocatore l'altro giocatore da confrontare
-     * @return esito del confronto alfabetico
-     */
-    @Override
-    public int compareTo(Giocatore giocatore) {
-        return this.nome.compareTo(giocatore.nome);
     }
 
     /**

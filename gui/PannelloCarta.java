@@ -11,8 +11,7 @@ import java.awt.*;
  */
 public class PannelloCarta extends JButton {
 
-    private final Carta CARTA;
-    private JButton BOTTONE;
+    private Carta CARTA;
 
     /**
      * Crea il componente grafico per la carta specificata.
@@ -25,19 +24,18 @@ public class PannelloCarta extends JButton {
     }
 
     private void inizializza() {
-        BOTTONE = PannelloCarta.this;
-        BOTTONE.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        BOTTONE.setFont(StileUI.caricaFont());
-        BOTTONE.setForeground(Color.WHITE);
-        BOTTONE.setFocusPainted(false);
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
+        setFont(StileUI.caricaFont());
+        setForeground(Color.WHITE);
+        setFocusPainted(false);
         setIcona();
-        BOTTONE.setContentAreaFilled(false);
-        BOTTONE.setBorderPainted(false);
+        setContentAreaFilled(false);
+        setBorderPainted(false);
     }
 
     private void setIcona() {
         ImageIcon icona = calcolaIcona();
-        BOTTONE.setIcon(icona);
+        setIcon(icona);
     }
 
     // Carica l'immagine JPG della carta e la ridimensiona a 90x120 pixel

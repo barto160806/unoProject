@@ -5,42 +5,35 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Rappresenta un Bot con strategia "Aggressiva".
- * Questo bot:
- * - Dà priorità strategica alle carte Jolly e speciali (+2, +4, Salta,
- * Inverti) per ostacolare gli avversari.
- * - Nello scambio Seven-Zero sceglie sempre l'avversario con meno carte in
- * mano.
- * - Nella scelta del colore sceglie strategicamente il colore maggiormente
- * presente nella propria mano.
- * - Adotta decisioni probabilistiche avanzate (70% di successo per
- * dichiarazione
- * di UNO,
- * contestazioni e challenge).
+ * Bot che adotta una strategia aggressiva, privilegiando le carte speciali
+ * e i jolly per mettere in difficolta' gli avversari. Sceglie sempre il
+ * colore piu' presente nella propria mano e, nello scambio Seven-Zero,
+ * punta all'avversario con meno carte. Le decisioni casuali (UNO,
+ * contestazioni, challenge) hanno il 70% di probabilita' di successo.
  */
 public class BotAggressivo extends Giocatore {
 
-    /** Contatore per l'assegnazione automatica del nome al bot. */
+    /** Contatore progressivo per assegnare nomi univoci ai bot aggressivi. */
     public static int contatoreGiocatore;
 
     private Valore[] listaValori = Valore.values();
     private List<Valore> listaJolly = List.of(Arrays.copyOfRange(listaValori, 10, 15));
 
     /**
-     * Costruttore di default che assegna un nome univoco.
+     * Crea un nuovo bot aggressivo con nome univoco progressivo.
      */
     public BotAggressivo() {
         super("Bot Aggressivo " + ++contatoreGiocatore);
     }
 
     /**
-     * Sceglie la mossa privilegiando le carte speciali/jolly per mettere in
-     * difficoltà gli avversari.
+     * Sceglie la carta da giocare dando priorita' a jolly e carte speciali;
+     * se non ne ha, gioca la prima carta valida disponibile.
      * 
      * @param cartaInCima       la carta in cima agli scarti
      * @param coloreCorrente    il colore attualmente attivo
-     * @param prossimoGiocatore nome del giocatore successivo nel turno
-     * @return la prima carta valida oppure null per pescare
+     * @param prossimoGiocatore il nome del prossimo giocatore
+     * @return la carta scelta, oppure null se deve pescare
      */
     @Override
     public Carta scegliMossa(Carta cartaInCima, Colore coloreCorrente, String prossimoGiocatore) {
@@ -59,12 +52,11 @@ public class BotAggressivo extends Giocatore {
     }
 
     /**
-     * Sceglie l'avversario che possiede il minor numero di carte per massimizzare
-     * il vantaggio nello scambio (regola del 7).
+     * Sceglie l'avversario con meno carte in mano per lo scambio della regola del 7.
      * 
-     * @param corrente  il bot stesso
-     * @param giocatori la lista di tutti i partecipanti
-     * @return il giocatore con meno carte
+     * @param corrente  il bot che ha giocato il 7
+     * @param giocatori tutti i giocatori della partita
+     * @return l'avversario con il minor numero di carte
      */
     @Override
     public Giocatore scegliGiocatoreDaScambiare(Giocatore corrente, List<Giocatore> giocatori) {
@@ -79,9 +71,9 @@ public class BotAggressivo extends Giocatore {
     }
 
     /**
-     * Sceglie il colore piu' frequente tra le carte presenti nella propria mano.
+     * Sceglie il colore piu' presente nella propria mano dopo aver giocato un jolly.
      * 
-     * @return il colore piu' comune nella mano
+     * @return il colore con piu' carte in mano
      */
     @Override
     public Colore scegliColore() {
@@ -129,10 +121,10 @@ public class BotAggressivo extends Giocatore {
     }
 
     /**
-     * Valuta strategicamente se lanciare la challenge al +4:
-     * accetta sempre se l'avversario ha meno di 3 carte o con probabilità del 70%.
+     * Decide se sfidare il +4: accetta sempre se l'avversario ha poche carte,
+     * altrimenti lancia la sfida con il 70% di probabilita'.
      * 
-     * @param carteAvversario numero di carte dell'avversario che ha giocato il +4
+     * @param carteAvversario le carte rimaste all'avversario
      * @return true se lancia la sfida, false altrimenti
      */
     @Override
@@ -148,9 +140,9 @@ public class BotAggressivo extends Giocatore {
     }
 
     /**
-     * Dichiara UNO con una probabilità del 70%.
+     * Dichiara UNO con il 70% di probabilita' di ricordarsi.
      * 
-     * @return true se dichiara UNO, false altrimenti
+     * @return true se dichiara UNO, false se se ne dimentica
      */
     @Override
     public boolean haDichiaratoUno() {
@@ -158,9 +150,9 @@ public class BotAggressivo extends Giocatore {
     }
 
     /**
-     * Contesta la mancata dichiarazione di UNO con una probabilità del 70%.
+     * Contesta un avversario che non ha detto UNO, con il 70% di probabilita'.
      * 
-     * @param bersaglio l'avversario con 1 carta
+     * @param bersaglio l'avversario da contestare
      * @return true se contesta, false altrimenti
      */
     @Override
@@ -168,7 +160,11 @@ public class BotAggressivo extends Giocatore {
         return probabilita();
     }
 
-    // Genera true con il 70% di probabilita'
+    /**
+     * Genera un esito positivo con il 70% di probabilita'.
+     * 
+     * @return true nel 70% dei casi, false altrimenti
+     */
     public boolean probabilita() {
         Random random = new Random();
         int numeroCasuale = random.nextInt(100);

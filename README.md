@@ -3,7 +3,7 @@ Questo documento contiene i requisiti tecnici, la struttura del progetto e tutte
 ---
 ### 1. Ambiente di Esecuzione
 
-* **Piattaforma Java**: JDK / JavaSE versione 21.
+* **Piattaforma Java**: JDK / JavaSE versione 25.
 * **Framework Grafico**: `javax.swing` (costruzione dell'interfaccia utente) e `java.awt` (gestione layout e timer dei bot).
 * **Dipendenze**: Sviluppato interamente senza librerie esterne.
 
@@ -15,12 +15,12 @@ Affinché il progetto carichi correttamente gli elementi grafici e i font a runt
 
 | Percorso | Tipologia | Descrizione |
 | :--- | :--- | :--- |
-| `backend/` | Codice sorgente | **Model**: gestione mazzo, regole, carte e gestione dei bot. |
-| `gui/` | Codice sorgente | **Controller and View**: (`FinestraPrincipale.java`) e pannelli grafici Swing. |
+| `backend/` | Codice sorgente | Contiene le classi che rappresentano il modello del gioco. |
+| `gui/` | Codice sorgente | Contiene l'interfaccia grafica e la gestione della partita. |
 | `gui/images/` | Risorse grafiche | Contiene i file per la visualizzazione delle 108 carte di gioco. |
 | `gui/Fredoka.ttf` | Risorsa tipografica | Font TrueType caricato dinamicamente a runtime per lo stile dell'interfaccia. |
 | `JavaDOC/` | Documentazione Tecnica | Documentazione generata in formato HTML tramite Javadoc. |
-| `RelazioneUNO.pdf` | Documento PDF | Relazione descrittiva del progetto, con UML annesso e dettagli sulle varianti. |
+| `relazioneUNO.pdf` | Documento PDF | Relazione descrittiva del progetto, con UML annesso e dettagli sulle varianti. |
 
 ---
 
@@ -28,7 +28,6 @@ Affinché il progetto carichi correttamente gli elementi grafici e i font a runt
 
 * **Classe principale da eseguire**: `gui.FinestraPrincipale`.
 * **Avvio della partita**: Eseguire il `main` nella classe principale, selezionare modalità e giocatori, quindi cliccare su **Avvia partita**.
-* **Limitazioni note**: Nessuna.
 
 ---
 
