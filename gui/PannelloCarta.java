@@ -11,7 +11,7 @@ import java.awt.*;
  */
 public class PannelloCarta extends JButton {
 
-    private Carta CARTA;
+    private final Carta carta;
 
     /**
      * Crea il componente grafico per la carta specificata.
@@ -19,7 +19,7 @@ public class PannelloCarta extends JButton {
      * @param carta la carta da mostrare, oppure null per il dorso coperto
      */
     public PannelloCarta(Carta carta) {
-        this.CARTA = carta;
+        this.carta = carta;
         inizializza();
     }
 
@@ -40,20 +40,20 @@ public class PannelloCarta extends JButton {
 
     // Carica l'immagine JPG della carta e la ridimensiona a 90x120 pixel
     private ImageIcon calcolaIcona() {
-        if (CARTA == null) {
+        if (carta == null) {
             ImageIcon iconaNulla = new ImageIcon("gui/images/cartaCoperta.jpg");
             Image iconaNullaModificata = iconaNulla.getImage().getScaledInstance(90, 120, Image.SCALE_SMOOTH);
             return new ImageIcon(iconaNullaModificata);
         }
 
-        Valore valore = CARTA.getValoreCarta();
+        Valore valore = carta.getValoreCarta();
         if (valore == Valore.WILD || valore == Valore.WILD_DRAW_FOUR) {
             ImageIcon iconaWild = new ImageIcon("gui/images/" + valore + ".jpg");
             Image iconaModificata = iconaWild.getImage().getScaledInstance(90, 120, Image.SCALE_SMOOTH);
             return new ImageIcon(iconaModificata);
         }
 
-        String coloreCarta = (CARTA.getColoreCarta() + "").toLowerCase();
+        String coloreCarta = (carta.getColoreCarta() + "").toLowerCase();
 
         ImageIcon iconaCalcolata = switch (valore) {
             case ZERO -> new ImageIcon("gui/images/" + coloreCarta + "0.jpg");
@@ -79,6 +79,6 @@ public class PannelloCarta extends JButton {
      * @return la carta associata
      */
     public Carta getCarta() {
-        return CARTA;
+        return carta;
     }
 }

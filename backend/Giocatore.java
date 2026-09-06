@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 /**
  * Classe astratta che rappresenta un giocatore di UNO (umano o bot).
- * Gestisce la mano di carte, il punteggio e definisce le azioni di gioco.
+ * Gestisce la mano di carte e definisce le azioni di gioco.
  */
 public abstract class Giocatore {
 

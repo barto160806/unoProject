@@ -152,6 +152,7 @@ public class FinestraPrincipale extends JFrame {
     private void nuovoRound() {
         for (Giocatore g : giocatori) {
             g.getMano().clear();
+            g.haDichiaratoUnoSuccesso = false;
         }
         pannelloTavolo.pulisciLogs();
         mazzoPesca = Mazzo.inizializzaMazzo();
@@ -160,7 +161,7 @@ public class FinestraPrincipale extends JFrame {
         accumuloPesca = 0;
         indiceGiocatoreCorrente = 0;
         partitaFinita = false;
-
+        haPescatoNelTurno = false;
         // Distribuzione iniziale di 7 carte a testa
         for (int i = 0; i < 7; i++) {
             for (Giocatore g : giocatori) {
@@ -172,7 +173,7 @@ public class FinestraPrincipale extends JFrame {
 
         // Prima carta sulla Pila Scarti
         Carta primaCarta = pescaCartaMazzo();
-        while (primaCarta.getValoreCarta() == Valore.WILD_DRAW_FOUR) {
+        while (primaCarta.getValoreCarta().ordinal() > Valore.NOVE.ordinal()) {
             mazzoPesca.add(primaCarta);
             Mazzo.mescola(mazzoPesca);
             primaCarta = pescaCartaMazzo();
@@ -574,6 +575,7 @@ public class FinestraPrincipale extends JFrame {
                     Giocatore bersaglio = giocatori.get(indiceGiocatoreCorrente);
                     bersaglio.aggiungiCarta(pescaCartaMazzo());
                     bersaglio.aggiungiCarta(pescaCartaMazzo());
+                    bersaglio.haDichiaratoUnoSuccesso = false;
                     pannelloTavolo.aggiungiLog(corrente.nome + " ha giocato un +2!\n" + bersaglio.nome
                             + " pesca 2 carte e salta il turno.");
                 }
@@ -584,7 +586,6 @@ public class FinestraPrincipale extends JFrame {
                 } else {
                     passaAlProssimoGiocatore();
                     Giocatore bersaglio = giocatori.get(indiceGiocatoreCorrente);
-
                     boolean challengeAttivata = false;
                     if (bersaglio instanceof GiocatoreUmano) {
                         int risposta = JOptionPane.showConfirmDialog(this,
@@ -612,8 +613,10 @@ public class FinestraPrincipale extends JFrame {
                                     + " aveva il colore e pesca 4 carte.");
                             for (int i = 0; i < 4; i++)
                                 corrente.aggiungiCarta(pescaCartaMazzo());
+                            corrente.haDichiaratoUnoSuccesso = false;
                             indiceGiocatoreCorrente = (indiceGiocatoreCorrente - direzione + giocatori.size())
                                     % giocatori.size();
+
                         } else {
                             JOptionPane.showMessageDialog(this,
                                     bersaglio.nome + " ha perso la Challenge!\n" + corrente.nome
@@ -622,10 +625,12 @@ public class FinestraPrincipale extends JFrame {
                                     "Challenge Fallita", JOptionPane.ERROR_MESSAGE);
                             for (int i = 0; i < 6; i++)
                                 bersaglio.aggiungiCarta(pescaCartaMazzo());
+                            bersaglio.haDichiaratoUnoSuccesso = false;
                         }
                     } else {
                         for (int i = 0; i < 4; i++)
                             bersaglio.aggiungiCarta(pescaCartaMazzo());
+                        bersaglio.haDichiaratoUnoSuccesso = false;
                         pannelloTavolo.aggiungiLog(corrente.nome + " ha giocato un +4!\n" + bersaglio.nome
                                 + " pesca 4 carte e salta il turno.");
                     }

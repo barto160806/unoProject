@@ -9,8 +9,6 @@ import java.util.Arrays;
  * Gestisce la creazione e il mescolamento del mazzo da 108 carte di UNO.
  */
 public class Mazzo {
-    private static List<Carta> mazzo = inizializzaMazzo();
-
     /**
      * Crea un mazzo completo da 108 carte e lo mescola.
      * 
@@ -55,19 +53,5 @@ public class Mazzo {
      */
     public static void mescola(List<Carta> mazzoDaMescolare) {
         Collections.shuffle(mazzoDaMescolare);
-    }
-
-    /**
-     * Restituisce la rappresentazione in testo del mazzo.
-     * 
-     * @return stringa con tutte le carte
-     */
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (Carta carta : mazzo) {
-            sb.append(carta);
-        }
-        return sb.toString();
     }
 }

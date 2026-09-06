@@ -4,7 +4,8 @@ Questo documento contiene i requisiti tecnici, la struttura del progetto e tutte
 ### 1. Ambiente di Esecuzione
 
 * **Piattaforma Java**: JDK / JavaSE versione 25.
-* **Framework Grafico**: `javax.swing` (costruzione dell'interfaccia utente) e `java.awt` (gestione layout e timer dei bot).
+* **Framework Grafico**: `javax.swing` per l'interfaccia grafica e il timer dei bot,
+  `java.awt` per layout, colori e dimensioni dei componenti.
 * **Dipendenze**: Sviluppato interamente senza librerie esterne.
 
 ---
