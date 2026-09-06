@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Bot che gioca in modo completamente casuale: scarta la prima carta
- * valida che trova, sceglie colori e avversari a caso, e prende ogni
- * decisione (UNO, contestazioni, challenge) lanciando una moneta.
+ * Bot con una strategia semplice: gioca la prima carta valida che trova,
+ * mentre sceglie casualmente colori, avversari e decisioni come
+ * dichiarazione UNO, contestazione e challenge.
  */
 public class BotCasuale extends Giocatore {
 
@@ -57,7 +57,8 @@ public class BotCasuale extends Giocatore {
 
     /**
      * Sceglie un colore a caso tra quelli presenti nella propria mano
-     * dopo aver giocato un jolly. Se non ha carte colorate, ne sceglie uno qualsiasi.
+     * dopo aver giocato un jolly. Se non ha carte colorate, ne sceglie uno
+     * qualsiasi.
      * 
      * @return il colore scelto
      */
