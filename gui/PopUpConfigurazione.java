@@ -131,7 +131,7 @@ public class PopUpConfigurazione extends JDialog {
         pannelloSelezioneGiocatori.setOpaque(false);
         pannelloSelezioneGiocatori.setBorder(BorderFactory.createTitledBorder("Numero giocatori"));
 
-        selezioneNumeroGiocatori = new JSlider(2, 10, 2);
+        selezioneNumeroGiocatori = new JSlider(2, 6, 2);
         pannelloSelezioneGiocatori.add(selezioneNumeroGiocatori);
         selezioneNumeroGiocatori.setMajorTickSpacing(1);
         selezioneNumeroGiocatori.setPaintLabels(true);

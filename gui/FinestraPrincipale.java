@@ -386,9 +386,23 @@ public class FinestraPrincipale extends JFrame {
                     Colore nuovoColore = ScegliColore.mostraColore(this);
                     setScartiColore(nuovoColore);
                 }
+
                 applicaEffettiRegole(cartaScelta, corrente);
             }
-
+            if (corrente.getNumeroCarte() == 1) {
+                if (!corrente.haDichiaratoUnoSuccesso) {
+                    for (Giocatore g : giocatori) {
+                        if (!g.equals(corrente) && !(g instanceof GiocatoreUmano) && g.contestazioneUno(corrente)) {
+                            JOptionPane.showMessageDialog(this,
+                                    g.nome + " contesta la mancata dichiarazione di UNO! Peschi 2 carte.",
+                                    "Contestazione Subita!", JOptionPane.WARNING_MESSAGE);
+                            corrente.aggiungiCarta(pescaCartaMazzo());
+                            corrente.aggiungiCarta(pescaCartaMazzo());
+                            break;
+                        }
+                    }
+                }
+            }
             if (corrente.getNumeroCarte() == 0) {
                 gestisciFineRound(corrente);
                 return;
@@ -579,7 +593,7 @@ public class FinestraPrincipale extends JFrame {
                                 "Challenge +4", JOptionPane.YES_NO_OPTION);
                         challengeAttivata = (risposta == JOptionPane.YES_OPTION);
                     } else {
-                        challengeAttivata = bersaglio.effettuaChallenge(4);
+                        challengeAttivata = bersaglio.effettuaChallenge(corrente.getNumeroCarte());
                         if (challengeAttivata) {
                             JOptionPane.showMessageDialog(this, bersaglio.nome
                                     + " lancia una Challenge sul +4 giocato da " + corrente.nome + "!", "Challenge",
@@ -658,14 +672,17 @@ public class FinestraPrincipale extends JFrame {
     }
 
     private boolean checkCarteNumericheUguali(Giocatore corrente, Carta cartaScelta) {
-        if (!varianteStacking) {
+        if (cartaScelta.getValoreCarta() == getCartaInCima().getValoreCarta()) {
+
             if (cartaScelta.getValoreCarta().ordinal() > Valore.NOVE.ordinal()) {
                 return false;
             }
+            return corrente.getMano().stream()
+                    .filter(carta -> !carta.equals(cartaScelta))
+                    .anyMatch(carta -> carta.getValoreCarta() == cartaScelta.getValoreCarta());
+        } else {
+            return false;
         }
-        return corrente.getMano().stream()
-                .filter(carta -> !carta.equals(cartaScelta))
-                .anyMatch(carta -> carta.getValoreCarta() == cartaScelta.getValoreCarta());
     }
 
     // Gestisce la fine del round, assegna i punti e apre la schermata punteggi

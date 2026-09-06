@@ -105,12 +105,4 @@ public class PannelloAzioni extends JPanel {
     public JButton getBottoneSalta() {
         return bottoneSalta;
     }
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        frame.setSize(500, 500);
-        PannelloAzioni azioni = new PannelloAzioni();
-        frame.add(azioni);
-        frame.setVisible(true);
-    }
 }
