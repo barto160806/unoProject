@@ -690,6 +690,9 @@ public class FinestraPrincipale extends JFrame {
             }
             case ZERO -> {
                 if (varianteSevenZero) {
+                    if (corrente.getNumeroCarte() == 0) {
+                        return;
+                    }
                     List<List<Carta>> listaMani = new ArrayList<>();
                     for (Giocatore g : giocatori) {
                         listaMani.add(new ArrayList<>(g.getMano()));
@@ -705,6 +708,9 @@ public class FinestraPrincipale extends JFrame {
             }
             case SETTE -> {
                 if (varianteSevenZero) {
+                    if (corrente.getNumeroCarte() == 0) {
+                        return;
+                    }
                     Giocatore bersaglio;
                     if (corrente instanceof GiocatoreUmano) {
                         bersaglio = ScegliGiocatore.mostraGiocatore(this, corrente, giocatori);
