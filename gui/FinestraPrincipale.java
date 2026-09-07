@@ -84,9 +84,7 @@ public class FinestraPrincipale extends JFrame {
         collegaEventiGUI();
 
         // Apertura popup di configurazione all'avvio
-        SwingUtilities.invokeLater(() -> {
-            apriConfigurazionePartita();
-        });
+        apriConfigurazionePartita();
     }
 
     /**
