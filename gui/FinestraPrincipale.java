@@ -607,9 +607,6 @@ public class FinestraPrincipale extends JFrame {
      * @param corrente il giocatore che ha giocato la carta
      */
     private void applicaEffettiRegole(Carta carta, Giocatore corrente) {
-        if (corrente.getNumeroCarte() == 0) {
-            return;
-        }
         Valore valore = carta.getValoreCarta();
 
         switch (valore) {
@@ -763,8 +760,13 @@ public class FinestraPrincipale extends JFrame {
     private void gestisciFineRound(Giocatore vincitoreRound) {
         if (timerTurnoBot != null)
             timerTurnoBot.stop();
+        int puntiPartita = giocatori.stream()
+                .filter(g -> !g.equals(vincitoreRound))
+                .mapToInt(g -> g.calcolaPuntiMano())
+                .sum();
         if (!modalitaPunti) {
-            pannelloTavolo.aggiungiLog("COMPLIMENTI! " + vincitoreRound.nome + " ha vinto la partita.");
+            pannelloTavolo.aggiungiLog(
+                    "COMPLIMENTI! " + vincitoreRound.nome + " ha vinto la partita con " + puntiPartita + " punti.");
             partitaFinita = true;
             aggiornaStatoGrafico();
             return;

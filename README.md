@@ -20,14 +20,14 @@ Affinché il progetto carichi correttamente gli elementi grafici e i font a runt
 | `gui/` | Codice sorgente | Contiene l'interfaccia grafica e la gestione della partita. |
 | `gui/images/` | Risorse grafiche | Contiene i file per la visualizzazione delle 108 carte di gioco. |
 | `gui/Fredoka.ttf` | Risorsa tipografica | Font TrueType caricato dinamicamente a runtime per lo stile dell'interfaccia. |
-| `JavaDOC/` | Documentazione Tecnica | Documentazione generata in formato HTML tramite Javadoc. |
+| `docs/JavaDOC/` | Documentazione Tecnica | Documentazione generata in formato HTML tramite Javadoc. |
 | `relazioneUNO.pdf` | Documento PDF | Relazione descrittiva del progetto, con UML annesso e dettagli sulle varianti. |
 
 ---
 
 ### 3. Modalità di Avvio e Istruzioni di Gioco
 
-* **Classe principale da eseguire**: `gui.FinestraPrincipale`.
+* **Classe principale da eseguire**: `gui.Main`.
 * **Avvio della partita**: Eseguire il `main` nella classe principale, selezionare modalità e giocatori, quindi cliccare su **Avvia partita**.
 
 ---
