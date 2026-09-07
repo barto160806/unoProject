@@ -922,17 +922,4 @@ public class FinestraPrincipale extends JFrame {
         controllaEAvviaTurnoBot();
     }
 
-    /**
-     * Punto di ingresso dell'applicazione UNO.
-     * Crea e mostra la finestra principale nell'Event Dispatch Thread di Swing.
-     *
-     * @param args argomenti da linea di comando (non utilizzati)
-     */
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            FinestraPrincipale finestra = new FinestraPrincipale();
-            finestra.setResizable(false);
-            finestra.setVisible(true);
-        });
-    }
 }
